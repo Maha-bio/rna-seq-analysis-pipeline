@@ -1,0 +1,12 @@
+name: rnaseq
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python=3.11
+  - snakemake
+  - fastqc
+  - multiqc
+  - fastp
+  - samtools
+  - wget
