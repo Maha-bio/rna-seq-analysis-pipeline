@@ -1,0 +1,165 @@
+# ===========================
+# Operating System
+# ===========================
+.DS_Store
+Thumbs.db
+
+# ===========================
+# VS Code
+# ===========================
+.vscode/
+.history/
+
+# ===========================
+# Python
+# ===========================
+__pycache__/
+*.pyc
+*.pyo
+
+# ===========================
+# R
+# ===========================
+.Rhistory
+.RData
+.Rproj.user/
+
+# ===========================
+# Conda
+# ===========================
+.conda/
+conda-meta/
+
+# ===========================
+# Raw sequencing data
+# ===========================
+data/raw/*
+!data/raw/.gitkeep
+
+data/trimmed/*
+!data/trimmed/.gitkeep
+
+# ===========================
+# Reference files
+# ===========================
+data/reference/*
+!data/reference/README.md
+
+data/transcriptome/*
+!data/transcriptome/README.md
+
+data/index/*
+!data/index/README.md
+
+# ===========================
+# Alignment
+# ===========================
+results/star/*
+!results/star/.gitkeep
+
+*.bam
+*.bai
+*.sam
+
+# ===========================
+# Salmon results
+# ===========================
+results/salmon/*
+!results/salmon/.gitkeep
+
+# ===========================
+# Counts
+# ===========================
+results/counts/*
+!results/counts/.gitkeep
+
+# ===========================
+# Logs
+# ===========================
+*.log
+logs/
+
+# ===========================
+# Temporary files
+# ===========================
+tmp/
+temp/
+
+# ===========================
+# Reports
+# ===========================
+report/*.html
+report/*.pdf
+
+
+
+# Raw sequencing data
+data/raw/
+*.fastq
+*.fastq.gz
+
+# Large reference files
+data/reference/*.fa
+data/reference/*.fasta
+data/reference/*.gtf
+data/reference/*.gtf.gz
+
+# Salmon outputs
+results/salmon/
+
+# Large intermediate files
+*.bam
+*.sam
+
+# Conda environments
+*.conda/
+.env/
+
+# Logs
+*.log
+
+# Snakemake
+.snakemake/
+
+# Raw data
+data/raw/
+*.fastq
+*.fastq.gz
+
+# Reference files
+data/reference/*.fa
+data/reference/*.fasta
+data/reference/*.gtf
+data/reference/*.gtf.gz
+
+# Salmon
+results/salmon/
+
+# Fastp
+results/fastp/
+
+# FastQC
+results/fastqc/
+
+# MultiQC
+results/multiqc/
+
+# Full results
+results/deseq2/*.csv
+results/enrichment/*.csv
+
+# Logs
+*.log
+
+# Temporary
+*.tmp
+*.temp
+
+# Shell execution scripts
+scripts/*.sh
+
+results/*
+
+# Keep example results for GitHub
+!results/example/
+!results/example/*

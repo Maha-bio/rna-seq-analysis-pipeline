@@ -1,0 +1,9 @@
+samples:
+  - SRR1552444
+  - SRR1552445
+  - SRR1552446
+  - SRR1552447
+
+salmon_index: data/index/reference_index
+
+metadata: data/sample_metadata.csv
