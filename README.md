@@ -1,23 +1,23 @@
-#  Reproducible RNA-seq Analysis Pipeline 
-
-
+# Reproducible RNA-seq Analysis Pipeline with Snakemake
 
 
 ## Project Overview
 
-This repository contains a **complete and reproducible RNA-sequencing analysis workflow** developed for mouse transcriptomic data.
+This repository contains a **fully reproducible RNA-seq analysis workflow** developed using **Snakemake**.
 
-The pipeline implements a standard bioinformatics workflow used in genomics research laboratories, starting from raw sequencing reads and leading to biological interpretation through differential expression and pathway enrichment analyses.
+The pipeline implements a standard transcriptomics workflow commonly used in genomics and molecular biology research laboratories, starting from raw sequencing reads and producing differential expression results and biological interpretation.
 
 The workflow integrates:
 
-* Quality control of sequencing reads
+* Raw sequencing quality control
+* Read preprocessing
 * Transcript-level quantification
-* Gene-level summarization
+* Transcript-to-gene summarization
 * Differential gene expression analysis
 * Functional enrichment analysis
 
-The entire analysis environment is managed using **Conda** to ensure reproducibility.
+The complete computational environment is managed using **Conda** to ensure reproducibility across systems.
+
 
 ---
 
@@ -56,6 +56,21 @@ Biological interpretation
 
 ---
 
+
+
+
+
+# Workflow Execution
+---
+The complete analysis is automated through **Snakemake**.
+
+Run the entire pipeline:
+
+```bash
+snakemake --cores 4
+---
+
+
 # Biological Dataset
 
 ## Organism
@@ -90,22 +105,24 @@ data/sample_metadata.csv
 
 ## Quality Control
 
-| FastQC  | Read quality assessment |
-| MultiQC | Aggregated QC reporting |
+ FastQC  : Read quality assessment 
+
+ MultiQC : Aggregated QC reporting 
 
 ## Quantification
 
-| Salmon | Transcript abundance estimation |
+ Salmon : Transcript abundance estimation 
 
 ## Statistical Analysis
 
-| tximport | Transcript-level to gene-level summarization |
-| DESeq2   | Differential expression analysis             |
+ tximport : Transcript-level to gene-level summarization 
+
+ DESeq2   : Differential expression analysis             
 
 ## Functional Annotation
 
-| clusterProfiler | GO and KEGG enrichment |
-| org.Mm.eg.db    | Mouse gene annotation  |
+ clusterProfiler : GO and KEGG enrichment 
+ org.Mm.eg.db    : Mouse gene annotation  
 
 ## Programming
 
@@ -120,34 +137,30 @@ data/sample_metadata.csv
 ```
 rna-seq-analysis-pipeline/
 
-├── data/
+├── Snakefile
+├── environment.yml
+├── README.md
 │
-│   ├── raw/
-│   │   └── FASTQ sequencing files
-│   │
+├── config/
+│   └── config.yaml
+│
+├── data/
+│   ├── sample_metadata.csv
 │   └── reference/
-│       ├── gencode.vM25.annotation.gtf
 │       └── tx2gene.csv
 │
 ├── scripts/
-│
-│   ├── create_tx2gene.R
-│   │
 │   └── R/
+│       ├── create_tx2gene.R
 │       ├── deseq2_analysis.R
 │       └── enrichment_GO_KEGG.R
 │
-├── results/
-│
-│   ├── fastqc/
-│   ├── multiqc/
-│   ├── salmon/
-│   ├── deseq2/
-│   └── enrichment/
-│
-├── environment.yml
-├── sample_metadata.csv
-└── README.md
+└── results/
+    └── example/
+        ├── PCA.png
+        ├── MA_plot.png
+        ├── Volcano_plot.png
+        └── Heatmap.png
 ```
 
 ---
@@ -188,80 +201,45 @@ The environment contains:
 
 ---
 
-# Analysis Steps
+Workflow Outputs
+Quality Control
 
-## 1. Quality Control
+Generated reports:
 
-Run:
+results/fastqc/
+results/multiqc/
+Salmon Quantification
 
-```bash
-fastqc data/raw/*.fastq.gz \
--o results/fastqc
-```
+Transcript abundance estimation:
 
-Generate summary report:
-
-```bash
-multiqc results/fastqc \
--o results/multiqc
-```
-
----
-
-## 2. Transcript Quantification
-
-Salmon generates transcript abundance estimates:
-
-```
 results/salmon/<sample>/quant.sf
-```
 
-Example output:
+Output contains:
 
-```
 Name
 Length
 EffectiveLength
 TPM
 NumReads
-```
+Transcript-to-Gene Mapping
 
----
+The workflow generates:
 
-## 3. Transcript-to-Gene Mapping
-
-Generate mapping table from GENCODE annotation:
-
-```bash
-Rscript scripts/create_tx2gene.R
-```
-
-Output:
-
-```
 data/reference/tx2gene.csv
-```
 
----
+This table links transcript identifiers to gene identifiers for downstream analysis.
 
-## 4. Differential Expression Analysis
+Differential Expression Analysis
 
-Run:
+DESeq2 performs:
 
-```bash
-Rscript scripts/R/deseq2_analysis.R
-```
+library normalization
+dispersion estimation
+statistical testing
+multiple testing correction
 
-The workflow performs:
+Generated outputs:
 
-* normalization
-* dispersion estimation
-* statistical testing
-* adjusted p-value correction
-
-Output:
-
-```
 results/deseq2/
 
 ├── DESeq2_results.csv
@@ -270,29 +248,16 @@ results/deseq2/
 ├── MA_plot.png
 ├── Volcano_plot.png
 └── Heatmap.png
-```
+Functional Enrichment Analysis
 
----
+Functional interpretation is performed using:
 
-## 5. Functional Enrichment
-
-Run:
-
-```bash
-Rscript scripts/R/enrichment_GO_KEGG.R
-```
-
-The analysis identifies enriched biological functions:
-
-* Gene Ontology Biological Processes
-* KEGG pathways
+Gene Ontology (GO)
+KEGG pathways
 
 Results:
 
-```
 results/enrichment/
-```
-
 ---
 
 # Generated Visualizations
