@@ -1,6 +1,5 @@
 # Reproducible RNA-seq Analysis Pipeline with Snakemake
 
-
 ## Project Overview
 
 This repository contains a **fully reproducible RNA-seq analysis workflow** developed using **Snakemake**.
@@ -9,21 +8,20 @@ The pipeline implements a standard transcriptomics workflow commonly used in gen
 
 The workflow integrates:
 
-* Raw sequencing quality control
-* Read preprocessing
-* Transcript-level quantification
-* Transcript-to-gene summarization
-* Differential gene expression analysis
-* Functional enrichment analysis
+- Raw sequencing quality control
+- Read preprocessing
+- Transcript-level quantification
+- Transcript-to-gene summarization
+- Differential gene expression analysis
+- Functional enrichment analysis
 
 The complete computational environment is managed using **Conda** to ensure reproducibility across systems.
 
-
 ---
 
-#  Pipeline Workflow
+## Pipeline Workflow
 
-```
+```text
 Raw FASTQ files
         |
         v
@@ -56,12 +54,8 @@ Biological interpretation
 
 ---
 
-
-
-
-
 # Workflow Execution
----
+
 The complete analysis is automated through **Snakemake**.
 
 Run the entire pipeline:
@@ -69,72 +63,76 @@ Run the entire pipeline:
 ```bash
 snakemake --cores 4
 ---
+## Biological Dataset
 
-
-# Biological Dataset
-
-## Organism
+### Organism
 
 **Mus musculus (mouse)**
 
 Reference annotation:
 
-* Genome assembly: **GRCm38 / mm10**
-* Annotation source: **GENCODE release M25**
+- Genome assembly: **GRCm38 / mm10**
+- Annotation source: **GENCODE release M25**
 
-## Experimental design
+### Experimental Design
 
 The dataset contains two biological conditions:
 
-| Sample ID  | Condition |
-| ---------- | --------- |
-| SRR1552444 | Control   |
-| SRR1552445 | Control   |
-| SRR1552446 | Case      |
-| SRR1552447 | Case      |
+| Sample ID | Condition |
+|-----------|-----------|
+| SRR1552444 | Control |
+| SRR1552445 | Control |
+| SRR1552446 | Case |
+| SRR1552447 | Case |
 
 Experimental metadata is stored in:
 
-```
+```text
 data/sample_metadata.csv
 ```
 
 ---
 
-# Computational Tools
+## Computational Tools
 
-## Quality Control
+### Quality Control
 
- FastQC  : Read quality assessment 
+| Tool | Purpose |
+|------|---------|
+| FastQC | Read quality assessment |
+| MultiQC | Aggregated QC reporting |
 
- MultiQC : Aggregated QC reporting 
+### Quantification
 
-## Quantification
+| Tool | Purpose |
+|------|---------|
+| Salmon | Transcript abundance estimation |
 
- Salmon : Transcript abundance estimation 
+### Statistical Analysis
 
-## Statistical Analysis
+| Tool | Purpose |
+|------|---------|
+| tximport | Transcript-level to gene-level summarization |
+| DESeq2 | Differential expression analysis |
 
- tximport : Transcript-level to gene-level summarization 
+### Functional Annotation
 
- DESeq2   : Differential expression analysis             
+| Tool | Purpose |
+|------|---------|
+| clusterProfiler | GO and KEGG enrichment |
+| org.Mm.eg.db | Mouse gene annotation |
 
-## Functional Annotation
+### Programming
 
- clusterProfiler : GO and KEGG enrichment 
- org.Mm.eg.db    : Mouse gene annotation  
-
-## Programming
-
-* R
-* Bash
-* Conda
+- R
+- Bash
+- Conda
 
 ---
 
-# Repository Structure
+## Repository Structure
 
-```
+```text
 rna-seq-analysis-pipeline/
 
 ├── Snakefile
@@ -165,18 +163,38 @@ rna-seq-analysis-pipeline/
 
 ---
 
-# Installation
+## Installation
 
-## Clone repository
+### Clone Repository
 
 ```bash
 git clone https://github.com/Maha-bio/rna-seq-analysis-pipeline.git
-
 cd rna-seq-analysis-pipeline
 ```
 
----
+### Create Reproducible Environment
 
+```bash
+conda env create -f environment.yml
+```
+
+Activate the environment:
+
+```bash
+conda activate rnaseq
+```
+
+The environment contains:
+
+- R 4.5
+- Bioconductor packages
+- Salmon
+- FastQC
+- MultiQC
+- DESeq2
+- clusterProfiler
+
+---
 ## Create reproducible environment
 
 ```bash
@@ -201,45 +219,57 @@ The environment contains:
 
 ---
 
-Workflow Outputs
-Quality Control
+## Workflow Outputs
+
+### Quality Control
 
 Generated reports:
 
+```text
 results/fastqc/
 results/multiqc/
-Salmon Quantification
+```
+
+### Salmon Quantification
 
 Transcript abundance estimation:
 
+```text
 results/salmon/<sample>/quant.sf
+```
 
-Output contains:
+Each quantification file contains:
 
+```text
 Name
 Length
 EffectiveLength
 TPM
 NumReads
-Transcript-to-Gene Mapping
+```
+
+### Transcript-to-Gene Mapping
 
 The workflow generates:
 
+```text
 data/reference/tx2gene.csv
+```
 
 This table links transcript identifiers to gene identifiers for downstream analysis.
 
-Differential Expression Analysis
+### Differential Expression Analysis
 
 DESeq2 performs:
 
-library normalization
-dispersion estimation
-statistical testing
-multiple testing correction
+- library normalization
+- dispersion estimation
+- statistical testing
+- multiple testing correction
 
 Generated outputs:
 
+```text
 results/deseq2/
 
 ├── DESeq2_results.csv
@@ -248,18 +278,20 @@ results/deseq2/
 ├── MA_plot.png
 ├── Volcano_plot.png
 └── Heatmap.png
-Functional Enrichment Analysis
+```
+
+### Functional Enrichment Analysis
 
 Functional interpretation is performed using:
 
-Gene Ontology (GO)
-KEGG pathways
+- Gene Ontology (GO)
+- KEGG pathways
 
 Results:
 
+```text
 results/enrichment/
----
-
+```
 # Generated Visualizations
 
 The pipeline automatically generates:
