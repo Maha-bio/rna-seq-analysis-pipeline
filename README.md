@@ -63,6 +63,9 @@ Run the entire pipeline:
 ```bash
 snakemake --cores 4
 ---
+
+---
+
 ## Biological Dataset
 
 ### Organism
@@ -322,18 +325,16 @@ Summarizes enriched biological pathways.
 
 This project follows bioinformatics reproducibility principles:
 
- Conda-based environment management
- Version-controlled scripts
- Structured project organization
- Automated result generation
- Separation of raw data, scripts and results
- Documented workflow
+* Conda-based environment management
+* Version-controlled scripts
+* Structured project organization
+* Automated result generation
+* Separation of raw data, scripts and results
+* Documented workflow
 
 ---
 
-# Future Development
-
-Planned improvements:
+# Planned improvements
 
 * Snakemake workflow automation
 * Automated pipeline execution
