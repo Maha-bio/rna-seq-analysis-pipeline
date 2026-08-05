@@ -336,9 +336,8 @@ This project follows bioinformatics reproducibility principles:
 
 # Planned improvements
 
-* Snakemake workflow automation
-* Automated pipeline execution
-*  Docker/Singularity containerization
+* Nextflow version
+* Docker/Singularity containerization
 * RNA-seq report generation with Quarto
 * Support for paired-end sequencing
 * Integration of alignment-based workflow (STAR + featureCounts)
