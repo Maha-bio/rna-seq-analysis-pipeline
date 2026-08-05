@@ -54,7 +54,7 @@ Biological interpretation
 
 ---
 
-# Workflow Execution
+## Workflow Execution
 
 The complete analysis is automated through **Snakemake**.
 
@@ -62,7 +62,7 @@ Run the entire pipeline:
 
 ```bash
 snakemake --cores 4
----
+```
 
 ---
 
